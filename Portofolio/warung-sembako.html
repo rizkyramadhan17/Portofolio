@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Warung Sembako Sugeng</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bungee&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --hijau-warung:#1F4D36;
+    --hijau-tua:#153826;
+    --krem:#F5EFDD;
+    --krem-kartu:#FFFCF3;
+    --merah-bata:#A63A2E;
+    --kuning-jagung:#E3A93B;
+    --coklat-tua:#2E2620;
+    --coklat-soft:#6B5D4F;
+    --garis:#DCD0AF;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--krem);
+    color:var(--coklat-tua);
+    font-family:'Plus Jakarta Sans', sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;text-decoration:none;}
+  img{display:block;max-width:100%;}
+
+  /* ===== Awning stripe pattern ===== */
+  .awning{
+    height:14px;
+    background:repeating-linear-gradient(
+      90deg,
+      var(--hijau-warung) 0 40px,
+      var(--krem-kartu) 40px 80px
+    );
+    border-bottom:2px solid var(--coklat-tua);
+  }
+
+  /* ===== Header ===== */
+  header{
+    background:var(--hijau-warung);
+    color:var(--krem-kartu);
+    padding:18px 6vw;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:12px;
+  }
+  .brand{
+    display:flex;
+    align-items:center;
+    gap:12px;
+  }
+  .brand-mark{
+    width:46px;height:46px;
+    background:var(--kuning-jagung);
+    border-radius:10px;
+    display:flex;align-items:center;justify-content:center;
+    font-size:24px;
+    border:2px solid var(--coklat-tua);
+    transform:rotate(-4deg);
+  }
+  .brand-text .nama{
+    font-family:'Bungee', sans-serif;
+    font-size:1.1rem;
+    letter-spacing:0.5px;
+  }
+  .brand-text .sub{
+    font-size:0.75rem;
+    opacity:0.8;
+  }
+  nav{
+    display:flex;
+    gap:26px;
+    font-weight:600;
+    font-size:0.92rem;
+  }
+  nav a{opacity:0.9;transition:opacity .2s;}
+  nav a:hover{opacity:1;text-decoration:underline;text-underline-offset:4px;}
+  .wa-btn{
+    background:var(--kuning-jagung);
+    color:var(--coklat-tua);
+    padding:10px 18px;
+    border-radius:8px;
+    font-weight:700;
+    font-size:0.88rem;
+    border:2px solid var(--coklat-tua);
+    box-shadow:3px 3px 0 var(--coklat-tua);
+    transition:transform .15s, box-shadow .15s;
+  }
+  .wa-btn:hover{transform:translate(-2px,-2px);box-shadow:5px 5px 0 var(--coklat-tua);}
+
+  /* ===== Hero ===== */
+  .hero{
+    padding:70px 6vw 60px;
+    display:grid;
+    grid-template-columns:1.1fr 0.9fr;
+    gap:40px;
+    align-items:center;
+    max-width:1300px;
+    margin:0 auto;
+  }
+  .hero-eyebrow{
+    display:inline-block;
+    background:var(--merah-bata);
+    color:#fff;
+    font-size:0.75rem;
+    font-weight:700;
+    padding:5px 12px;
+    border-radius:20px;
+    letter-spacing:0.5px;
+    margin-bottom:18px;
+  }
+  .hero h1{
+    font-family:'Bungee', sans-serif;
+    font-size:clamp(2.1rem, 4.6vw, 3.6rem);
+    line-height:1.15;
+    color:var(--hijau-tua);
+    margin-bottom:18px;
+  }
+  .hero h1 span{color:var(--merah-bata);}
+  .hero p{
+    font-size:1.05rem;
+    color:var(--coklat-soft);
+    max-width:480px;
+    margin-bottom:26px;
+    line-height:1.6;
+  }
+  .hero-cta{display:flex;gap:14px;flex-wrap:wrap;}
+  .btn-primary{
+    background:var(--hijau-warung);
+    color:#fff;
+    padding:14px 26px;
+    border-radius:10px;
+    font-weight:700;
+    border:2px solid var(--coklat-tua);
+    box-shadow:4px 4px 0 var(--coklat-tua);
+    transition:transform .15s, box-shadow .15s;
+  }
+  .btn-primary:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--coklat-tua);}
+  .btn-ghost{
+    padding:14px 22px;
+    font-weight:700;
+    color:var(--hijau-tua);
+    border-bottom:2px solid var(--hijau-tua);
+  }
+
+  /* hero visual: stacked price tags */
+  .hero-visual{
+    position:relative;
+    height:340px;
+  }
+  .float-card{
+    position:absolute;
+    background:var(--krem-kartu);
+    border:2px solid var(--coklat-tua);
+    border-radius:14px;
+    padding:16px 18px;
+    box-shadow:5px 5px 0 var(--coklat-tua);
+    width:170px;
+  }
+  .float-card .emoji{font-size:2.2rem;}
+  .float-card .nm{font-weight:700;font-size:0.95rem;margin-top:6px;}
+  .float-card .pr{
+    font-family:'JetBrains Mono',monospace;
+    color:var(--merah-bata);
+    font-weight:700;
+    margin-top:4px;
+  }
+  .fc1{top:0;left:10%;transform:rotate(-6deg);}
+  .fc2{top:120px;left:45%;transform:rotate(4deg);z-index:2;}
+  .fc3{top:220px;left:5%;transform:rotate(3deg);}
+
+  /* ===== Section heading ===== */
+  .section{padding:50px 6vw;max-width:1300px;margin:0 auto;}
+  .section-head{
+    display:flex;
+    align-items:baseline;
+    justify-content:space-between;
+    margin-bottom:30px;
+    flex-wrap:wrap;
+    gap:10px;
+    border-bottom:3px solid var(--coklat-tua);
+    padding-bottom:14px;
+  }
+  .section-head h2{
+    font-family:'Bungee', sans-serif;
+    font-size:1.5rem;
+    color:var(--hijau-tua);
+  }
+  .section-head .ket{
+    font-size:0.85rem;
+    color:var(--coklat-soft);
+    font-weight:600;
+  }
+
+  /* ===== Product grid ===== */
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(210px,1fr));
+    gap:22px;
+  }
+  .produk{
+    background:var(--krem-kartu);
+    border:2px solid var(--coklat-tua);
+    border-radius:14px;
+    overflow:hidden;
+    transition:transform .18s, box-shadow .18s;
+    box-shadow:3px 3px 0 var(--garis);
+    display:flex;
+    flex-direction:column;
+  }
+  .produk:hover{transform:translateY(-5px);box-shadow:5px 6px 0 var(--kuning-jagung);}
+  .foto{
+    height:120px;
+    display:flex;align-items:center;justify-content:center;
+    font-size:3.4rem;
+    background:var(--hijau-warung);
+    position:relative;
+  }
+  .foto.b2{background:var(--merah-bata);}
+  .foto.b3{background:var(--kuning-jagung);}
+  .foto.b4{background:var(--coklat-soft);}
+  .badge-stok{
+    position:absolute;top:8px;right:8px;
+    background:#fff;
+    color:var(--coklat-tua);
+    font-size:0.65rem;
+    font-weight:700;
+    padding:3px 8px;
+    border-radius:20px;
+  }
+  .info{padding:14px 16px 16px;flex:1;display:flex;flex-direction:column;gap:6px;}
+  .info .nama-produk{font-weight:700;font-size:0.98rem;}
+  .info .satuan{font-size:0.78rem;color:var(--coklat-soft);}
+  .info .harga{
+    margin-top:auto;
+    font-family:'JetBrains Mono',monospace;
+    font-weight:700;
+    font-size:1.05rem;
+    color:var(--merah-bata);
+    padding-top:8px;
+    border-top:1.5px dashed var(--garis);
+  }
+
+  /* category tag strip */
+  .kategori-strip{
+    display:flex;gap:10px;flex-wrap:wrap;margin-bottom:36px;
+  }
+  .tag{
+    font-size:0.8rem;font-weight:700;
+    background:var(--hijau-tua);color:#fff;
+    padding:8px 16px;border-radius:20px;
+  }
+  .tag.alt{background:var(--merah-bata);}
+  .tag.alt2{background:var(--kuning-jagung);color:var(--coklat-tua);}
+
+  /* ===== Info strip (jam, lokasi) ===== */
+  .infostrip{
+    background:var(--hijau-tua);
+    color:#fff;
+    padding:40px 6vw;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:24px;
+    margin-top:30px;
+  }
+  .infostrip .item h3{
+    font-family:'Bungee',sans-serif;
+    font-size:0.95rem;
+    color:var(--kuning-jagung);
+    margin-bottom:8px;
+  }
+  .infostrip .item p{font-size:0.88rem;line-height:1.6;opacity:0.9;}
+
+  /* ===== Footer ===== */
+  footer{
+    background:var(--coklat-tua);
+    color:var(--krem);
+    padding:30px 6vw;
+    text-align:center;
+    font-size:0.85rem;
+  }
+  footer .fnama{font-family:'Bungee',sans-serif;font-size:1rem;color:var(--kuning-jagung);margin-bottom:8px;}
+
+  @media (max-width:820px){
+    .hero{grid-template-columns:1fr;}
+    .hero-visual{display:none;}
+    nav{display:none;}
+  }
+</style>
+</head>
+<body>
+
+<div class="awning"></div>
+
+<header>
+  <div class="brand">
+    <div class="brand-mark">🌾</div>
+    <div class="brand-text">
+      <div class="nama">WARUNG SEMBAKO SUGENG</div>
+      <div class="sub">Sembako Lengkap, Harga Bersahabat</div>
+    </div>
+  </div>
+  <nav>
+    <a href="#sembako">Sembako Pokok</a>
+    <a href="#bumbu">Bumbu Dapur</a>
+    <a href="#minuman">Minuman & Snack</a>
+    <a href="#kebutuhan">Kebutuhan Harian</a>
+  </nav>
+  <a class="wa-btn" href="https://wa.me/6281234567890" target="_blank">Pesan via WhatsApp</a>
+</header>
+
+<section class="hero">
+  <div>
+    <span class="hero-eyebrow">BUKA SETIAP HARI 06.00–21.00</span>
+    <h1>Belanja Sembako <span>Ga Perlu Antri,</span><br>Tinggal Klik Aja.</h1>
+    <p>Warung Sembako Sugeng menyediakan kebutuhan dapur sehari-hari dengan harga pas dan stok selalu segar. Cek daftar harga di bawah, langsung pesan lewat WhatsApp.</p>
+    <div class="hero-cta">
+      <a class="btn-primary" href="#sembako">Lihat Daftar Harga</a>
+      <a class="btn-ghost" href="#kebutuhan">Kebutuhan Lainnya →</a>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="float-card fc1">
+      <div class="emoji">🍚</div>
+      <div class="nm">Beras Premium</div>
+      <div class="pr">Rp 14.000/kg</div>
+    </div>
+    <div class="float-card fc2">
+      <div class="emoji">🥚</div>
+      <div class="nm">Telur Ayam</div>
+      <div class="pr">Rp 29.000/kg</div>
+    </div>
+    <div class="float-card fc3">
+      <div class="emoji">🧂</div>
+      <div class="nm">Minyak Goreng</div>
+      <div class="pr">Rp 17.500/L</div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="sembako">
+  <div class="section-head">
+    <h2>🧺 Sembako Pokok</h2>
+    <span class="ket">Harga per Agustus 2026</span>
+  </div>
+  <div class="grid">
+    <div class="produk">
+      <div class="foto">🍚<span class="badge-stok">Stok Ready</span></div>
+      <div class="info">
+        <div class="nama-produk">Beras Pandan Wangi</div>
+        <div class="satuan">per kilogram</div>
+        <div class="harga">Rp 14.000</div>
+      </div>
+    </div>
+    <div class="produk">
+      <div class="foto b2">🌾<span class="badge-stok">Stok Ready</span></div>
+      <div class="info">
+        <div class="nama-produk">Tepung Terigu Segitiga</div>
+        <div class="satuan">per kg</div>
+        <div class="harga">Rp 12.500</div>
+      </div>
+    </div>
+    <div class="produk">
+      <div class="foto b3">🍬<span class="badge-stok">Stok Ready</span></div>
+      <div class="info">
+        <div class="nama-produk">Gula Pasir</div>
+        <div class="satuan">per kg</div>
+        <div class="harga">Rp 17.000</div>
+      </div>
+    </div>
+    <div class="produk">
+      <div class="foto b4">🧈<span class="badge-stok">Stok Ready</span></div>
+      <div class="info">
+        <div class="nama-produk">Minyak Goreng Kemasan</div>
+        <div class="satuan">per liter</div>
+        <div class="harga">Rp 17.500</div>
+      </div>
+    </div>
+    <div class="produk">
+      <div class="foto">🥚<span class="badge-stok">Stok Ready</span></div>
+      <div class="info">
+        <div class="nama-produk">Telur Ayam Negeri</div>
+        <div class="satuan">per kg</div>
+        <div class="harga">Rp 29.000</div>
+      </div>
+    </div>
+    <div class="produk">
+      <div class="foto b2">🧂<span class="badge-stok">Stok Ready</span></div>
+      <div class="info">
+        <div class="nama-produk">Garam Dapur Beryodium</div>
+        <div class="satuan">per bungkus 250gr</div>
+        <div class="harga">Rp 3.000</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="bumbu">
+  <div class="section-head">
+    <h2>🌶️ Bumbu Dapur</h2>
+    <span class="ket">Segar setiap hari</span>
+  </div>
+  <div class="grid">
+    <div class="produk">
+      <div class="foto b2">🧄<span class="badge-stok">Fresh</span></div>
+      <div class="info">
+        <div class="nama-produk">Bawang Putih</div>
+        <div class="satuan">per kg</div>
+        <div class="harga">Rp 32.000</div>
+      </div>
+    </div>
+    <div class="produk">
+      <div class="foto b3">🧅<span class="badge-stok">Fresh</span></div>
+      <div class="info">
+        <div class="nama-produk">Bawang Merah</div>
+        <div class="satuan">per kg</div>
+        <div class="harga">Rp 35.000</div>
+      </div>
+    </div>
+    <div class="produk">
+      <div class="foto">🌶️<span class="badge-stok">Fresh</span></div>
+      <div class="info">
+        <div class="nama-produk">Cabai Rawit Merah</div>
+        <div class="satuan">per kg</div>
+        <div class="harga">Rp 45.000</div>
+      </div>
+    </div>
+    <div class="produk">
+      <div class="foto b4">🍅<span class="badge-stok">Fresh</span></div>
+      <div class="info">
+        <div class="nama-produk">Tomat Segar</div>
+        <div class="satuan">per kg</div>
+        <div class="harga">Rp 10.000</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="minuman">
+  <div class="section-head">
+    <h2>☕ Minuman & Snack</h2>
+    <span class="ket">Favorit pelanggan</span>
+  </div>
+  <div class="grid">
+    <div class="produk">
+      <div class="foto b3">☕<span class="badge-stok">Stok Ready</span></div>
+      <div class="info">
+        <div class="nama-produk">Kopi Sachet (isi 10)</div>
+        <div class="satuan">per renceng</div>
+        <div class="harga">Rp 11.000</div>
+      </div>
+    </div>
+    <div class="produk">
+      <div class="foto">🍜<span class="badge-stok">Stok Ready</span></div>
+      <div class="info">
+        <div class="nama-produk">Mie Instan Goreng</div>
+        <div class="satuan">per bungkus</div>
+        <div class="harga">Rp 3.500</div>
+      </div>
+    </div>
+    <div class="produk">
+      <div class="foto b2">🍵</div>
+      <div class="info">
+        <div class="nama-produk">Teh Celup (isi 25)</div>
+        <div class="satuan">per kotak</div>
+        <div class="harga">Rp 8.500</div>
+      </div>
+    </div>
+    <div class="produk">
+      <div class="foto b4">🥤</div>
+      <div class="info">
+        <div class="nama-produk">Sirup Rasa Buah</div>
+        <div class="satuan">per botol 600ml</div>
+        <div class="harga">Rp 16.000</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="kebutuhan">
+  <div class="section-head">
+    <h2>🧼 Kebutuhan Harian</h2>
+    <span class="ket">Selalu tersedia</span>
+  </div>
+  <div class="grid">
+    <div class="produk">
+      <div class="foto">🧴<span class="badge-stok">Stok Ready</span></div>
+      <div class="info">
+        <div class="nama-produk">Sabun Cuci Piring</div>
+        <div class="satuan">per botol 750ml</div>
+        <div class="harga">Rp 9.500</div>
+      </div>
+    </div>
+    <div class="produk">
+      <div class="foto b3">🧽</div>
+      <div class="info">
+        <div class="nama-produk">Deterjen Bubuk</div>
+        <div class="satuan">per bungkus 800gr</div>
+        <div class="harga">Rp 13.000</div>
+      </div>
+    </div>
+    <div class="produk">
+      <div class="foto b2">🔥</div>
+      <div class="info">
+        <div class="nama-produk">Gas LPG 3kg</div>
+        <div class="satuan">per tabung</div>
+        <div class="harga">Rp 22.000</div>
+      </div>
+    </div>
+    <div class="produk">
+      <div class="foto b4">🧻</div>
+      <div class="info">
+        <div class="nama-produk">Tisu Gulung</div>
+        <div class="satuan">per pack isi 4</div>
+        <div class="harga">Rp 14.500</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="infostrip">
+  <div class="item">
+    <h3>📍 LOKASI</h3>
+    <p>Jln Mawar No 10 Komplek Kodam Jaya Jatiwarna<br>Dekat pasar tradisional & sekolah</p>
+  </div>
+  <div class="item">
+    <h3>🕐 JAM BUKA</h3>
+    <p>Setiap hari, 06.00 – 21.00 WIB<br>Libur besar tetap buka</p>
+  </div>
+  <div class="item">
+    <h3>💬 CARA PESAN</h3>
+    <p>Chat WhatsApp, sebutkan barang & jumlah.<br>Bisa antar untuk area sekitar warung.</p>
+  </div>
+  <div class="item">
+    <h3>💳 PEMBAYARAN</h3>
+    <p>Tunai, QRIS, dan Transfer Bank<br>tersedia di tempat.</p>
+  </div>
+</div>
+
+<footer>
+  <div class="fnama">WARUNG SEMBAKO SUGENG</div>
+  <p>Sembako lengkap, harga bersahabat, sejak dulu jadi andalan warga sekitar.</p>
+  <p style="margin-top:10px;opacity:0.7;">© 2026 Warung Sembako Sugeng — Semua harga dapat berubah sewaktu-waktu.</p>
+</footer>
+
+</body>
+</html>
